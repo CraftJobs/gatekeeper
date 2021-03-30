@@ -12,10 +12,11 @@ import (
 )
 
 var (
-	proxyUrl = os.Getenv("PROXY_URL")
-	apiUrl   = os.Getenv("API_URL")
-	field    = os.Getenv("FIELD")
-	port     = os.Getenv("PORT")
+	proxyUrl  = os.Getenv("PROXY_URL")
+	apiUrl    = os.Getenv("API_URL")
+	field     = os.Getenv("FIELD")
+	port      = os.Getenv("PORT")
+	subdomain = os.Getenv("SUBDOMAIN")
 )
 
 func main() {
@@ -33,7 +34,9 @@ func main() {
 }
 
 func redirect(w http.ResponseWriter) {
-	w.Header().Set("Location", "https://craftjobs.net/i/gklogin?s="+field)
+	w.Header().Set(
+		"Location",
+		"https://craftjobs.net/i/gklogin?s="+subdomain+"&f="+field)
 	w.WriteHeader(302)
 }
 
