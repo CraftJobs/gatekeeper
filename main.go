@@ -77,6 +77,10 @@ func contains(s []string, e string) bool {
 
 func handler(p *httputil.ReverseProxy) func(http.ResponseWriter, *http.Request) {
 	return func(w http.ResponseWriter, r *http.Request) {
+		// For NGINX routing
+		r.Host = strings.ReplaceAll(proxyUrl, "http://", "")
+		r.Host = strings.ReplaceAll(r.Host, "https://", "")
+
 		if selfDomain == "cdt.craftjobs.net" {
 			redirDomain := r.URL.Query().Get("d")
 
